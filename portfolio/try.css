@@ -1,0 +1,16 @@
+body{
+  margin:0;
+}
+.top-box{
+  background-color:#94B49F;
+  position:fixed;
+  width: 100px;
+  height:100px;
+}
+.bottom-box{
+  background-color: #DAE2B6;
+  position: absolute;
+  left: 100px;
+  width:100px;
+  height:100px;
+}

@@ -1,0 +1,128 @@
+body {
+  background-image: url("C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\images\mountain.png");
+  margin: 0;
+  text-align: center;
+  font-family: 'Merriweather', serif;
+}
+
+h1 {
+  color: #66BFBF;
+  font-family: 'Sacramento', cursive;
+  font-size: 5.625rem;
+  margin: 50px auto 0 auto;
+}
+
+h2 {
+  color: #66BFBF;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  margin: 0 auto 0 auto;
+  font-weight: bold;
+  line-height: 1;
+}
+
+h3 {
+  color: #11999E;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+p {
+  line-height: 2;
+  color: #576F72;
+}
+
+hr {
+  border: dotted #576F72 5px;
+  width: 3%;
+  border-bottom: none;
+}
+a{
+  margin: 10px 10px;
+font-family: 'Montserrat', sans-serif;
+color: #11999E;
+text-decoration: none;
+}
+a:hover{
+color: #395B64;
+}
+.my-profile {
+  width: 150px;
+  margin-bottom: 20px;
+}
+
+.skill-row {
+  margin: 40px auto 100px auto;
+  width: 50%;
+  text-align: left;
+  line-height: 2;
+}
+
+.top-container {
+  background-color: #E4F9F5;
+  padding: 100px;
+}
+
+.bottom-container{
+  background-color: #E4F9F5;
+  padding: 50px;
+}
+.mountain {
+  width: 600px;
+}
+
+.img-game {
+  width: 25%;
+  float: left;
+  margin: 30px;
+}
+
+.img-program {
+  width: 25%;
+  float: right;
+  margin: 30px;
+}
+
+.pro {
+  text-decoration: underline;
+}
+
+.bottom-cloud {
+  position: absolute;
+  left: 400px;
+}
+
+.top-cloud {
+  position: absolute;
+  top: 100px;
+  right: 450px;
+}
+.copyright{
+  margin:20px auto;
+}
+.btn {
+  background: #b1daf5;
+  background-image: -webkit-linear-gradient(top, #b1daf5, #2980b9);
+  background-image: -moz-linear-gradient(top, #b1daf5, #2980b9);
+  background-image: -ms-linear-gradient(top, #b1daf5, #2980b9);
+  background-image: -o-linear-gradient(top, #b1daf5, #2980b9);
+  background-image: linear-gradient(to bottom, #b1daf5, #2980b9);
+  -webkit-border-radius: 10;
+  -moz-border-radius: 10;
+  border-radius: 10px;
+  font-family: Georgia;
+  color: #ffffff;
+  font-size: 10px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none;
+}
+
+.btn:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
+}
