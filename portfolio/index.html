@@ -1,76 +1,945 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-
+<!doctype html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <title>pranay.prajapati</title>
-  <link rel="icon" href="C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\images\man-icon.png">
-  <link rel="stylesheet" href="C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\css\style.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&family=Montserrat&family=Sacramento&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pranay — builder of websites, bots and automations</title>
+<meta name="description" content="Pranay builds websites, WhatsApp bots and automations. Founder of Pathfynder. Take the trip through everything I've shipped.">
+<meta property="og:title" content="Pranay — take the trip through what I've built">
+<meta property="og:description" content="Websites, WhatsApp bots, automations and the Pathfynder rideshare platform. Live demos inside.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🚗</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#E9EEF2; --card:#FFFFFF; --ink:#1E2A3A; --muted:#566679; --road:#2B3A4D;
+  --lane:#FFC93C; --teal:#0FA3A3; --red:#F2545B; --sign:#0E6B4F; --signInk:#FFFFFF;
+  --hair:#CBD5DF; --wa:#25D366; --waBg:#E7DDD3; --waOut:#D9FDD3; --waIn:#FFFFFF;
+  --r-lg:22px; --r-md:14px; --r-sm:8px;
+  --display:"Bricolage Grotesque", "Arial Narrow", system-ui, sans-serif;
+  --body:"Atkinson Hyperlegible", system-ui, -apple-system, "Segoe UI", sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1724; --card:#172234; --ink:#E8EEF5; --muted:#9AAABE; --road:#24344A;
+    --hair:#2A3B52; --sign:#127A5A; --waBg:#0B141A; --waOut:#005C4B; --waIn:#202C33; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1724; --card:#172234; --ink:#E8EEF5; --muted:#9AAABE; --road:#24344A;
+  --hair:#2A3B52; --sign:#127A5A; --waBg:#0B141A; --waOut:#005C4B; --waIn:#202C33; color-scheme: dark;
+}
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(64px + env(safe-area-inset-top,0px))}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 17px/1.55 var(--body);-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-bottom:84px}
+img,svg,iframe{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--lane);outline-offset:3px;border-radius:6px}
+h1,h2,h3{font-family:var(--display);line-height:1.02;margin:0;letter-spacing:-.02em}
+p{margin:0 0 .8em}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+
+/* top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.logo{border:0;background:none;padding:4px 0;font:800 20px/1 var(--display);letter-spacing:-.03em;display:flex;align-items:center;gap:8px}
+.logo i{width:12px;height:12px;border-radius:50%;background:var(--lane);box-shadow:0 0 0 4px color-mix(in srgb,var(--lane) 30%,transparent)}
+.top-actions{display:flex;gap:8px;align-items:center}
+.pill{border:1.5px solid var(--hair);background:var(--card);border-radius:999px;padding:8px 14px;font-weight:700;font-size:14px;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.lights{width:40px;height:40px;padding:0;justify-content:center}
+
+/* hero */
+.hero{padding:28px 0 8px}
+.hero h1{font-size:clamp(40px,11vw,92px);font-weight:800;max-width:12ch}
+.hero .sub{font-size:19px;color:var(--muted);max-width:36ch;margin-top:18px}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.btn{border:0;border-radius:999px;padding:14px 22px;font-weight:700;font-size:16px;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:transform .15s}
+.btn:active{transform:scale(.96)}
+.btn-go{background:var(--lane);color:#1E2A3A}
+.btn-ghost{background:transparent;border:2px solid var(--ink)}
+.btn-wa{background:var(--wa);color:#073B1E}
+
+.highway{position:relative;margin-top:30px;height:150px;border-radius:var(--r-lg);background:var(--road);overflow:hidden}
+.highway .dash{position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;background:repeating-linear-gradient(90deg,var(--lane) 0 34px,transparent 34px 68px);animation:roll 1.4s linear infinite}
+.turbo .highway .dash{animation-duration:.25s}
+@keyframes roll{to{background-position:-68px 0}}
+.highway .edge{position:absolute;left:0;right:0;height:3px;background:rgba(255,255,255,.35)}
+.highway .edge.t{top:14px}.highway .edge.b{bottom:14px}
+.car{position:absolute;left:18%;top:26px;border:0;background:none;padding:0;font-size:56px;line-height:1;transform:scaleX(-1);filter:drop-shadow(0 6px 6px rgba(0,0,0,.35));animation:bob 1.2s ease-in-out infinite}
+.car.honk{animation:honk .35s}
+@keyframes bob{50%{translate:0 -3px}}
+@keyframes honk{30%{transform:scaleX(-1) scale(1.15) rotate(4deg)}}
+.road-tip{position:absolute;right:14px;bottom:22px;color:#fff;font-size:13px;opacity:.85}
+.bubble{position:absolute;left:calc(18% + 70px);top:16px;background:#fff;color:#1E2A3A;border-radius:12px 12px 12px 2px;padding:6px 10px;font-weight:700;font-size:14px;opacity:0;transform:translateY(6px);transition:.2s;pointer-events:none}
+.bubble.show{opacity:1;transform:none}
+
+.odo{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.odo-item{background:var(--card);border-radius:var(--r-md);padding:12px 14px;flex:1 1 140px}
+.odo-num{font:800 30px/1 var(--display);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.odo-lbl{font-size:14px;color:var(--muted);margin-top:4px}
+
+/* route */
+.route-intro{padding:44px 0 6px}
+.route-intro h2{font-size:clamp(30px,7vw,52px)}
+.route-intro p{color:var(--muted);max-width:44ch;margin-top:10px}
+.route{position:relative;padding:10px 0 20px}
+.route::before{content:"";position:absolute;left:15px;top:0;bottom:0;width:8px;border-radius:8px;background:var(--road)}
+.route::after{content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:repeating-linear-gradient(to bottom,var(--lane) 0 14px,transparent 14px 28px)}
+.stop{position:relative;padding:34px 0 34px 46px}
+.node{position:absolute;left:5px;top:42px;width:28px;height:28px;border-radius:50%;background:var(--card);border:5px solid var(--road);z-index:2;transition:background .3s,transform .3s}
+.stop.stamped .node{background:var(--lane);transform:scale(1.12)}
+.sign{display:inline-block;background:var(--sign);color:var(--signInk);border-radius:12px;padding:12px 16px 14px;border:3px solid #fff;box-shadow:0 0 0 2px var(--sign);position:relative;max-width:100%}
+.exit{position:absolute;top:-14px;right:12px;background:var(--sign);border:2px solid #fff;border-radius:6px;padding:1px 8px;font:700 13px/1.4 var(--body)}
+.sign h2{font-size:clamp(28px,7.5vw,46px);font-weight:800}
+.sign .dest{margin:4px 0 0;font-size:15px;opacity:.9}
+.lede{font-size:18px;margin-top:18px;max-width:46ch}
+.facts{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:8px;max-width:48ch}
+.facts li{padding-left:26px;position:relative}
+.facts li::before{content:"";position:absolute;left:4px;top:.55em;width:10px;height:10px;border-radius:3px;background:var(--teal);transform:rotate(45deg)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.chip{font-size:13px;font-weight:700;border-radius:999px;padding:4px 10px;background:color-mix(in srgb,var(--teal) 14%,transparent);color:var(--ink)}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;margin-left:8px;vertical-align:middle}
+.status::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--wa);box-shadow:0 0 0 3px color-mix(in srgb,var(--wa) 30%,transparent)}
+.status.wip::before{background:var(--lane);box-shadow:0 0 0 3px color-mix(in srgb,var(--lane) 35%,transparent)}
+.visual{margin-top:22px}
+
+/* devices */
+.device-wrap{display:flex;flex-direction:column;align-items:center;gap:12px}
+.phone{--w:min(300px,78vw);width:var(--w);aspect-ratio:390/844;border-radius:44px;background:#0d0f12;padding:10px;box-shadow:0 30px 60px -20px rgba(15,23,36,.45),inset 0 0 0 2px #2a2f36;position:relative}
+.phone::before{content:"";position:absolute;top:18px;left:50%;width:84px;height:22px;margin-left:-42px;border-radius:20px;background:#000;z-index:5}
+.screen{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:var(--card)}
+.screen iframe{position:absolute;top:0;left:0;border:0;transform-origin:0 0;background:#fff}
+.laptop{width:min(100%,640px)}
+.laptop .lid{background:#0d0f12;border-radius:16px 16px 4px 4px;padding:12px;box-shadow:0 30px 60px -24px rgba(15,23,36,.45)}
+.laptop .screen{aspect-ratio:16/10;border-radius:6px}
+.laptop .base{height:14px;margin:0 -4%;background:linear-gradient(#c4ccd5,#8e98a4);border-radius:0 0 14px 14px}
+.shield{position:absolute;inset:0;display:flex;align-items:flex-end;justify-content:center;padding:18px;background:linear-gradient(to top,rgba(15,23,36,.55),transparent 45%);z-index:3;border:0;width:100%;color:#fff}
+.shield span{background:var(--lane);color:#1E2A3A;font-weight:700;border-radius:999px;padding:10px 16px;font-size:15px}
+.screen.live .shield{display:none}
+.ifr-done{position:absolute;top:44px;right:10px;z-index:4;border:0;border-radius:999px;background:#1E2A3A;color:#fff;font-weight:700;font-size:13px;padding:6px 12px;display:none}
+.laptop .ifr-done{top:8px}
+.screen.live .ifr-done{display:block}
+.loading{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-size:14px;color:var(--muted);padding:20px;background:var(--card)}
+.loading.gone{display:none}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.tab{border:1.5px solid var(--hair);background:var(--card);border-radius:999px;padding:7px 14px;font-size:14px;font-weight:700}
+.tab[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.open-link{font-size:14px;font-weight:700;color:var(--muted)}
+
+/* hot routes map */
+.map-card{background:var(--card);border-radius:var(--r-lg);padding:16px;margin-top:22px;max-width:560px}
+.map-card h3{font-size:22px}
+.map-card p{font-size:15px;color:var(--muted);margin:6px 0 10px}
+.map-svg text{font:700 11px var(--body);fill:var(--ink)}
+.map-svg .city{fill:var(--card);stroke:var(--ink);stroke-width:2.5}
+.map-svg .rt{fill:none;stroke:var(--hair);stroke-width:6;stroke-linecap:round;cursor:pointer;transition:stroke .2s}
+.map-svg .rt.on{stroke:var(--red);stroke-dasharray:10 8;animation:flow .8s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-18}}
+.route-btns{display:flex;flex-wrap:wrap;gap:6px}
+.route-read{font-size:15px;margin-top:10px;min-height:2.6em}
+.heat{display:inline-block;letter-spacing:2px}
+
+/* whatsapp sim */
+.wa{width:min(360px,100%);border-radius:var(--r-lg);overflow:hidden;background:var(--waBg);box-shadow:0 20px 50px -24px rgba(15,23,36,.5);margin-inline:auto}
+.wa-head{background:#075E54;color:#fff;display:flex;align-items:center;gap:10px;padding:10px 14px}
+.wa-ava{width:38px;height:38px;border-radius:50%;background:var(--lane);display:grid;place-items:center;font-size:20px}
+.wa-head b{display:block;font-size:16px}.wa-head small{opacity:.8;font-size:12px}
+.wa-body{height:320px;overflow-y:auto;padding:14px 12px;display:flex;flex-direction:column;gap:8px;background-image:radial-gradient(color-mix(in srgb,var(--ink) 7%,transparent) 1px,transparent 1px);background-size:16px 16px}
+.msg{max-width:84%;padding:7px 10px 8px;border-radius:10px;font-size:15px;line-height:1.4;box-shadow:0 1px 1px rgba(0,0,0,.12);animation:pop .2s ease-out;white-space:pre-line}
+.msg.in{align-self:flex-start;background:var(--waIn);border-top-left-radius:2px}
+.msg.out{align-self:flex-end;background:var(--waOut);border-top-right-radius:2px}
+.msg a{color:#027EB5;font-weight:700}
+.msg.typing{font-style:italic;color:var(--muted)}
+@keyframes pop{from{transform:scale(.92);opacity:0}}
+.wa-quick{display:flex;flex-direction:column;gap:6px;padding:10px 12px;background:color-mix(in srgb,var(--waBg) 70%,var(--card))}
+.qr{border:1.5px solid #128C7E;background:var(--card);color:var(--ink);border-radius:999px;padding:9px 12px;font-size:14px;font-weight:700;text-align:left}
+.qr:disabled{opacity:.45}
+
+/* n8n runner */
+.flow{background:var(--card);border-radius:var(--r-lg);padding:16px;max-width:620px}
+.nodes{display:grid;grid-template-columns:1fr;gap:10px;position:relative}
+.n{display:flex;align-items:center;gap:12px;border:2px solid var(--hair);border-radius:var(--r-md);padding:10px 12px;transition:border-color .25s,background .25s;position:relative}
+.n .ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:18px;background:color-mix(in srgb,var(--ink) 7%,transparent);flex:none}
+.n b{display:block;font-size:15px}.n small{color:var(--muted);font-size:13px}
+.n.active{border-color:var(--teal);background:color-mix(in srgb,var(--teal) 10%,transparent)}
+.n.done::after{content:"✓";position:absolute;right:12px;font-weight:700;color:var(--teal)}
+.n + .n::before{content:"";position:absolute;left:28px;top:-12px;width:2px;height:10px;background:var(--hair)}
+.log{margin-top:12px;background:#0F1724;color:#C9F7E4;border-radius:var(--r-md);padding:12px;font:13px/1.5 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;min-height:120px;white-space:pre-wrap;overflow-wrap:anywhere}
+.flow-row{display:flex;gap:8px;align-items:center;margin-top:12px;flex-wrap:wrap}
+.flow-input{flex:1 1 200px;border:1.5px solid var(--hair);background:var(--bg);color:var(--ink);border-radius:999px;padding:11px 14px;font:inherit;font-size:15px}
+
+/* pagepilot */
+.pp{width:min(340px,100%);margin-inline:auto;background:var(--card);border-radius:var(--r-lg);padding:14px;box-shadow:0 20px 50px -26px rgba(15,23,36,.5)}
+.pp-top{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:14px;margin-bottom:10px}
+.pp-count{background:var(--red);color:#fff;border-radius:999px;padding:2px 9px;font-size:12px}
+.pp-card{border:1.5px solid var(--hair);border-radius:var(--r-md);padding:12px;transition:transform .35s,opacity .35s;min-height:196px}
+.pp-card.fly-r{transform:translateX(120%) rotate(12deg);opacity:0}
+.pp-card.fly-l{transform:translateX(-120%) rotate(-12deg);opacity:0}
+.pp-dm{font-size:14px;background:color-mix(in srgb,var(--ink) 6%,transparent);border-radius:12px;padding:8px 10px}
+.pp-draft{margin-top:10px;border-radius:12px;padding:12px;color:#fff;font:700 17px/1.25 var(--display);min-height:88px;display:flex;align-items:flex-end}
+.pp-cap{font-size:13px;color:var(--muted);margin-top:8px}
+.pp-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}
+.pp-actions button{border:0;border-radius:999px;padding:11px;font-weight:700}
+.pp-no{background:color-mix(in srgb,var(--red) 16%,transparent)}
+.pp-yes{background:var(--teal);color:#fff}
+.feed{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:12px}
+.feed div{aspect-ratio:1;border-radius:4px;background:color-mix(in srgb,var(--ink) 8%,transparent);display:grid;place-items:center;font-size:20px;animation:pop .3s}
+
+/* mock screens */
+.mock{position:absolute;inset:0;display:flex;flex-direction:column}
+.hikari{background:#0b0a09;color:#f2e9dc;padding:46px 20px 20px;justify-content:space-between}
+.hikari .kanji{font:800 120px/1 serif;color:#e8b04a;text-shadow:0 0 40px rgba(232,176,74,.45);animation:glow 3s ease-in-out infinite}
+@keyframes glow{50%{text-shadow:0 0 70px rgba(232,176,74,.8)}}
+.hikari h4{font:800 34px/1 var(--display);margin:6px 0}
+.hikari ul{list-style:none;padding:0;margin:0;font-size:14px;display:grid;gap:8px}
+.hikari li{display:flex;justify-content:space-between;border-bottom:1px solid rgba(242,233,220,.18);padding-bottom:6px}
+.dm{background:radial-gradient(circle at 30% 20%,#ff3cac,transparent 50%),radial-gradient(circle at 80% 70%,#2b86c5,transparent 55%),#14062a;color:#fff;padding:52px 18px 18px;justify-content:space-between}
+.dm h4{font:800 46px/.9 var(--display);margin:0;text-transform:none}
+.eq{display:flex;align-items:flex-end;gap:5px;height:90px}
+.eq i{flex:1;background:#fff;border-radius:4px;height:12%;transition:height .08s}
+.beat{border:0;border-radius:999px;background:#fff;color:#14062a;font-weight:800;padding:14px;font-size:16px}
+
+/* spec tiles */
+.tiles{display:grid;gap:14px;max-width:760px}
+.tile{background:var(--card);border-radius:var(--r-lg);padding:18px}
+.tile h3{font-size:24px}
+.tile p{font-size:15px;color:var(--muted);margin:6px 0 12px}
+.fit-stage{display:flex;justify-content:center;padding:6px 0}
+.fit-range{width:100%;accent-color:#A12147}
+.fit-lbl{display:flex;justify-content:space-between;font-size:13px;font-weight:700;color:var(--muted)}
+.steps3{display:grid;gap:8px}
+.steps3 button{border:1.5px solid var(--hair);background:transparent;border-radius:var(--r-md);padding:10px 12px;text-align:left;font-weight:700;font-size:15px}
+.steps3 button[aria-pressed="true"]{background:#2D1B69;color:#fff;border-color:#2D1B69}
+.steps3 small{display:block;font-weight:400;font-size:13px;opacity:.85}
+
+/* reels */
+.reel-box{background:var(--card);border-radius:var(--r-lg);padding:16px;max-width:640px}
+.frames{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.frame{aspect-ratio:9/16;border-radius:12px;position:relative;overflow:hidden;color:#fff;padding:10px;display:flex;flex-direction:column;justify-content:flex-end;font:700 13px/1.25 var(--body)}
+.frame em{font-style:normal;position:absolute;top:8px;left:8px;font-size:11px;background:rgba(0,0,0,.45);border-radius:6px;padding:1px 6px}
+.frame .ava{position:absolute;top:8px;right:8px;width:28px;height:28px;border-radius:50%;background:var(--lane);display:grid;place-items:center;font-size:15px}
+.frame span{background:rgba(0,0,0,.55);border-radius:6px;padding:4px 6px}
+
+/* garage */
+.garage{display:flex;flex-wrap:wrap;gap:8px}
+.repo{display:flex;align-items:center;gap:10px;background:var(--card);border-radius:var(--r-md);padding:12px 14px;text-decoration:none;flex:1 1 220px}
+.repo b{display:block}.repo small{color:var(--muted);font-size:13px}
+
+/* your stop */
+.yours{padding:56px 0 20px}
+.yours h2{font-size:clamp(34px,8vw,64px);max-width:14ch}
+.yours>.wrap>p{color:var(--muted);max-width:44ch;margin-top:10px}
+.biz{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.biz button{border:2px solid var(--ink);background:transparent;border-radius:999px;padding:10px 16px;font-weight:700}
+.biz button[aria-pressed="true"]{background:var(--ink);color:var(--bg)}
+.plan{margin-top:16px;background:var(--card);border-radius:var(--r-lg);padding:18px;max-width:640px}
+.plan h3{font-size:24px;margin-bottom:10px}
+.plan ol{margin:0;padding-left:22px;display:grid;gap:8px}
+.plan .meta{font-size:14px;color:var(--muted);margin-top:12px}
+.slot{display:flex;align-items:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.slot-win{flex:1 1 260px;background:var(--road);color:#fff;border-radius:var(--r-md);padding:14px 16px;font-weight:700;min-height:56px;display:flex;align-items:center;overflow:hidden}
+.slot-win.spin span{animation:spinY .09s linear infinite}
+@keyframes spinY{from{transform:translateY(-60%);opacity:.3}to{transform:translateY(60%);opacity:.3}}
+
+/* ticket */
+.ticket{margin:40px auto 30px;max-width:620px;background:var(--card);border-radius:var(--r-lg);display:grid;grid-template-columns:1fr;position:relative;overflow:hidden;transition:background .5s,box-shadow .5s}
+.ticket.gold{background:linear-gradient(135deg,#FFE08A,#FFC93C 50%,#F4A92A);color:#1E2A3A;box-shadow:0 20px 60px -20px rgba(244,169,42,.8)}
+.ticket-main{padding:22px}
+.ticket h3{font-size:30px}
+.tk-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:16px 0}
+.tk-grid small{display:block;font-size:12px;opacity:.7}
+.tk-grid b{font-size:17px}
+.ticket-stub{border-top:2px dashed color-mix(in srgb,var(--ink) 25%,transparent);padding:18px 22px;display:flex;flex-wrap:wrap;gap:8px}
+.tk-note{font-size:14px;margin:0}
+.ticket .btn-ghost{border-color:currentColor}
+footer{text-align:center;color:var(--muted);font-size:14px;padding:10px 16px 30px}
+
+/* trip bar */
+.trip{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 14px calc(10px + env(safe-area-inset-bottom,0px));background:color-mix(in srgb,var(--card) 92%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-top:1px solid var(--hair)}
+.trip-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.trip-road{position:relative;flex:1;height:26px}
+.trip-road::before{content:"";position:absolute;left:0;right:0;top:50%;height:6px;margin-top:-3px;border-radius:6px;background:var(--road)}
+.trip-dot{position:absolute;top:50%;width:12px;height:12px;margin:-6px 0 0 -6px;border-radius:50%;background:var(--card);border:2px solid var(--road);padding:0;transition:.25s}
+.trip-dot.on{background:var(--lane);border-color:var(--lane);transform:scale(1.25)}
+.trip-car{position:absolute;top:50%;font-size:20px;margin:-14px 0 0 -12px;transform:scaleX(-1);transition:left .1s linear;pointer-events:none}
+.trip-count{font:800 15px/1 var(--display);white-space:nowrap;font-variant-numeric:tabular-nums}
+.trip-count small{display:block;font:400 11px var(--body);color:var(--muted);margin-top:2px}
+.toast{position:fixed;left:50%;bottom:86px;z-index:60;transform:translate(-50%,20px);opacity:0;background:var(--ink);color:var(--bg);font-weight:700;font-size:14px;border-radius:999px;padding:9px 16px;transition:.25s;pointer-events:none;white-space:nowrap}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:70}
+
+@media (min-width:900px){
+  body{font-size:18px}
+  .route::before{left:31px}.route::after{left:34px}
+  .node{left:21px}
+  .stop{padding-left:84px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:48px;align-items:start}
+  .stop>.txt{grid-column:1}
+  .stop>.visual{grid-column:2;grid-row:1 / span 2;margin-top:0}
+  .stop.wide{grid-template-columns:1fr}
+  .stop.wide>.visual{grid-column:1;grid-row:auto;margin-top:22px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .nodes{grid-template-columns:1fr 1fr}
+  .n + .n::before{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}
+  html{scroll-behavior:auto}
+}
+</style>
 </head>
-
 <body>
-  <div class="top-container">
 
-    <img class="top-cloud" src="images/cloud.png" alt="cloud-img">
-    <h1>I am pranay</h1>
-    <h2>A<strong> <span class="pro">pro</span></strong> programmer</h2>
-
-    <img class="mountain" src="images/mountain.png" alt="mountain-img">
-    <img class="bottom-cloud" src="images/cloud.png" alt="cloud-img">
+<header class="top">
+  <button class="logo" id="logo" aria-label="Pranay, home"><i></i>pranay.build</button>
+  <div class="top-actions">
+    <a class="pill" href="#yours">Work with me</a>
+    <button class="pill lights" id="theme" aria-label="Switch between day and night drive">🌙</button>
   </div>
-  <!---copied content---->
-  <br>
-  <br>
-  <br>
-  <div class="middle-container">
-    <div class="info">
-      <img class= "my-profile"src="images/pranay.png" alt="C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\images\pranay.png">
-      <h2>Hello.</h2>
-      <p>welcome to my page.GO ahead and know about my self, including my skills, work experience, and my friends</p>
-    </div>
-    <br>
-    <hr>
-    <br>
-    <br>
-    <div class="skills">
-      <h2>My Skills.</h2>
-      <div class="skill-row">
-        <img class="img-game" src="images/f1.jpg" alt="C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\images\f1.jpg">
-        <h3>Gaming</h3>
-        <p>F1 has become my regular motorsportgame.it's awesome, dreamy and gives very close experience like in real F1.
-          Formula One is the highest class of international racing for open-wheel single-seater formula racing cars sanctioned by the Fédération Internationale de l'Automobile. </p>
+</header>
+
+<main>
+<section class="hero wrap">
+  <h1>I build things that do the boring work for you.</h1>
+  <p class="sub">Websites, WhatsApp bots and automations — plus Pathfynder, the rideshare platform I run solo. This page is a road trip through what I've shipped. Every stop gets stamped.</p>
+  <div class="cta-row">
+    <a class="btn btn-go" href="#route">Start the trip</a>
+    <a class="btn btn-ghost" href="#yours">Skip to your idea</a>
+  </div>
+  <div class="highway" aria-label="Animated road. Tap the car to honk.">
+    <div class="edge t"></div><div class="dash"></div><div class="edge b"></div>
+    <button class="car" id="car" aria-label="Honk the horn">🚗</button>
+    <div class="bubble" id="bubble">Beep beep!</div>
+    <div class="road-tip">Tap the car</div>
+  </div>
+  <div class="odo" id="odo">
+    <div class="odo-item"><div class="odo-num" data-to="1579">0</div><div class="odo-lbl">riders organized from WhatsApp groups</div></div>
+    <div class="odo-item"><div class="odo-num" data-to="5">0</div><div class="odo-lbl">Ontario corridors served</div></div>
+    <div class="odo-item"><div class="odo-num" data-to="0" data-text="$0">$0</div><div class="odo-lbl">server bill — runs on free tiers</div></div>
+  </div>
+</section>
+
+<section class="route-intro wrap" id="route">
+  <h2>The route</h2>
+  <p>Ten stops. Each one is real, and most run live right here on the page — tap a phone screen to use the actual site.</p>
+</section>
+
+<div class="route wrap" id="stops">
+
+  <!-- 1 Pathfynder -->
+  <section class="stop" data-name="Pathfynder" id="s1">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 1</span><h2>Pathfynder</h2><p class="dest">Community rideshare for Ontario</p></div>
+      <p class="lede">Thousands of people already find rides in WhatsApp groups — by scrolling through hundreds of messages. Pathfynder reads those posts, puts them on a map, and matches drivers with passengers going the same way.<span class="status">Live</span></p>
+      <ul class="facts">
+        <li>No new habit to learn — it organizes the chats people already use</li>
+        <li>Matches by pickup, drop-off and time window, within kilometres</li>
+        <li>Explore page pulls rides from WhatsApp, Facebook and Poparide into one list</li>
+      </ul>
+      <div class="chips"><span class="chip">Supabase + PostGIS</span><span class="chip">n8n</span><span class="chip">OpenAI</span><span class="chip">Vercel</span><span class="chip">PWA</span></div>
+      <div class="map-card">
+        <h3>Hot routes, from real demand</h3>
+        <p>Requests get grouped by where people start, where they're going, and when. Tap a route.</p>
+        <svg class="map-svg" viewBox="0 0 340 220" role="img" aria-label="Schematic map of Ontario corridors">
+          <path class="rt" data-r="0" d="M44 70 C90 40 130 40 160 56"/>
+          <path class="rt" data-r="1" d="M160 56 C230 70 280 110 300 160"/>
+          <path class="rt" data-r="2" d="M262 198 C280 190 292 178 300 160"/>
+          <path d="M262 140 L300 160" stroke="var(--hair)" stroke-width="4" stroke-linecap="round"/>
+          <circle class="city" cx="44" cy="70" r="7"/><text x="16" y="96">Kitchener</text>
+          <circle class="city" cx="160" cy="56" r="7"/><text x="136" y="40">Brampton</text>
+          <circle class="city" cx="262" cy="140" r="6"/><text x="190" y="136">St. Catharines</text>
+          <circle class="city" cx="300" cy="160" r="7"/><text x="272" y="182">Niagara Falls</text>
+          <circle class="city" cx="262" cy="198" r="6"/><text x="214" y="214">Welland</text>
+        </svg>
+        <div class="route-btns">
+          <button class="tab" data-r="0">Kitchener → Brampton</button>
+          <button class="tab" data-r="1">Brampton → Niagara</button>
+          <button class="tab" data-r="2">Welland → Niagara</button>
+        </div>
+        <p class="route-read" id="routeRead" aria-live="polite">Pick a route to see why drivers would want it.</p>
       </div>
-      <div class="skill-row">
-        <img class="img-program" src="images/coding.jpg" alt="C:\Users\prana\OneDrive\Desktop\coding\CSS - website 2.0\images\coding.jpg">
-        <h3>programming</h3>
-        <p>This is new generations' skill i'm trying to learn to give value to my future.
-          Computer programming is the process of performing a particular computation, usually by designing and building an executable computer program. Programming involves tasks such as analysis, generating algorithms, profiling algorithms' accuracy
-          and resource consumption, and the implementation of algorithms. </p>
+      <div class="links">
+        <a class="btn btn-go" href="https://pathfynder.ca" target="_blank" rel="noopener">Visit pathfynder.ca</a>
       </div>
     </div>
-    <hr>
-    <div class="contact-me">
-      <br>
-      <br>
-      <h2>Get In Touch</h2>
-      <h3>if you want more information.</h3>
-      <p>you can contact me throgh this email.</p>
-      <a class="btn" href="mailto:pranay19987@gmail.com">CONTACT ME</a>
+    <div class="visual">
+      <div class="device-wrap" data-device="phone" data-tabs='[["Home","pathfynder"],["Explore rides","explore"]]'></div>
+    </div>
+  </section>
+
+  <!-- 2 Pathy bot -->
+  <section class="stop" data-name="Pathy WhatsApp bot" id="s2">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 2</span><h2>Pathy, the WhatsApp bot</h2><p class="dest">Post a ride by just texting</p></div>
+      <p class="lede">People type the way they talk — "anyone going niagara tmrw?? need ride from welland". Pathy is an AI agent that understands messages like that, asks only for what's missing, saves the ride with map coordinates and tells you who's going your way.<span class="status">Live</span></p>
+      <ul class="facts">
+        <li>Asks every missing detail in one message, not five</li>
+        <li>Never shares anyone's name or number — sends a safe link instead</li>
+        <li>Only replies when you message it, so it costs nothing to run</li>
+      </ul>
+      <div class="chips"><span class="chip">Meta WhatsApp Cloud API</span><span class="chip">OpenAI agent</span><span class="chip">n8n</span><span class="chip">Supabase</span></div>
+      <div class="links">
+        <a class="btn btn-wa" data-cfg-href="bot" href="#" target="_blank" rel="noopener">Chat with Pathy on WhatsApp</a>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="wa" aria-label="WhatsApp chat demo">
+        <div class="wa-head"><div class="wa-ava">🚗</div><div><b>Pathy</b><small id="waStatus">online · powered by Pathfynder</small></div></div>
+        <div class="wa-body" id="waBody" aria-live="polite">
+          <div class="msg in">Hey! I'm Pathy 👋 Tell me where you're going — or tap a message below to try me.</div>
+        </div>
+        <div class="wa-quick" id="waQuick">
+          <button class="qr" data-k="messy">anyone going niagara tmrw?? need ride from welland</button>
+          <button class="qr" data-k="pass">Need a ride Brampton to Niagara Falls Friday 5pm</button>
+          <button class="qr" data-k="drive">Driving Kitchener → Brampton tomorrow 8am, 3 seats</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3 Telegram mini app -->
+  <section class="stop" data-name="Telegram mini app" id="s3">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 3</span><h2>Telegram mini app</h2><p class="dest">pathfynder-form — an app inside a chat</p></div>
+      <p class="lede">Before the WhatsApp bot, Pathfynder lived inside Telegram. A tiny app opens right in the chat: post a ride, search for one, and — for drivers — manage passengers with the pickup order worked out automatically.<span class="status">Live</span></p>
+      <ul class="facts">
+        <li>Remembers your last route so posting takes seconds</li>
+        <li>Driver view with Google Maps routing and an Uber-style "on the way" screen</li>
+        <li>Ride history with every past passenger</li>
+      </ul>
+      <div class="chips"><span class="chip">Telegram Bot API</span><span class="chip">Mini App</span><span class="chip">Google Maps</span><span class="chip">PostGIS RPCs</span></div>
+    </div>
+    <div class="visual">
+      <div class="device-wrap" data-device="phone" data-tabs='[["Post a ride","miniapp"],["Search","miniSearch"],["Manage ride","miniManage"]]'></div>
+    </div>
+  </section>
+
+  <!-- 4 dashboard -->
+  <section class="stop wide" data-name="Dispatch dashboard" id="s4">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 4</span><h2>Dispatch dashboard</h2><p class="dest">app.pathfynder.ca — mission control</p></div>
+      <p class="lede">Every driver, passenger and ride on one live screen. Assign rides, spot busy routes and see what's happening across all corridors without opening a single group chat.<span class="status">Live</span></p>
+      <div class="chips"><span class="chip">Live data</span><span class="chip">Supabase</span><span class="chip">Role-locked database functions</span></div>
+    </div>
+    <div class="visual">
+      <div class="device-wrap" data-device="laptop" data-tabs='[["Dashboard","dashboard"]]'></div>
+    </div>
+  </section>
+
+  <!-- 5 n8n -->
+  <section class="stop" data-name="n8n automation" id="s5">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 5</span><h2>The automation engine</h2><p class="dest">n8n workflows that run while I sleep</p></div>
+      <p class="lede">Behind every bot reply is a chain of small steps: read the message, pull out the details, find it on a map, save it, find matches, reply. I build these chains in n8n on my own server. Type a ride message and run it.</p>
+      <ul class="facts">
+        <li>Self-hosted on a free cloud server — no monthly fees</li>
+        <li>One router sends every message to the right workflow, no mix-ups</li>
+        <li>The same pattern works for bookings, leads, invoices or support</li>
+      </ul>
+      <div class="chips"><span class="chip">n8n (self-hosted)</span><span class="chip">Docker</span><span class="chip">Oracle Cloud</span><span class="chip">Cloudflare</span></div>
+    </div>
+    <div class="visual">
+      <div class="flow">
+        <div class="nodes" id="nodes">
+          <div class="n"><div class="ic">💬</div><div><b>Message arrives</b><small>WhatsApp webhook</small></div></div>
+          <div class="n"><div class="ic">🧠</div><div><b>AI reads it</b><small>from, to, time, driver or rider</small></div></div>
+          <div class="n"><div class="ic">📍</div><div><b>Find it on a map</b><small>place name → coordinates</small></div></div>
+          <div class="n"><div class="ic">🗄️</div><div><b>Save the ride</b><small>Supabase + PostGIS</small></div></div>
+          <div class="n"><div class="ic">🔗</div><div><b>Match nearby rides</b><small>within 5 km and ±30 min</small></div></div>
+          <div class="n"><div class="ic">✅</div><div><b>Reply</b><small>with a link, not phone numbers</small></div></div>
+        </div>
+        <div class="flow-row">
+          <input class="flow-input" id="flowIn" value="need ride welland to niagara falls 7am" aria-label="Ride message to run through the workflow">
+          <button class="btn btn-go" id="runFlow">Run it</button>
+        </div>
+        <div class="log" id="log" aria-live="polite">Waiting for a message…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6 PagePilot -->
+  <section class="stop" data-name="PagePilot" id="s6">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 6</span><h2>PagePilot</h2><p class="dest">Instagram DMs → ready-to-post content</p></div>
+      <p class="lede">Community Instagram pages get flooded with "can you post this?" DMs. PagePilot turns each DM into a designed post with a caption. The admin just swipes: approve, and it's published.<span class="status wip">v0 running</span></p>
+      <ul class="facts">
+        <li>AI drafts the caption and picks the layout</li>
+        <li>Nothing goes out without a human tap</li>
+        <li>Built for a student help page in Ontario</li>
+      </ul>
+      <div class="chips"><span class="chip">Instagram Graph API</span><span class="chip">GPT-4o mini</span><span class="chip">Supabase</span><span class="chip">Caddy</span></div>
+      <div class="links">
+        <a class="btn btn-ghost" data-cfg-href="pagepilot" href="#" target="_blank" rel="noopener">Open PagePilot</a>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="pp">
+        <div class="pp-top"><span>Approval queue</span><span class="pp-count" id="ppCount">4 waiting</span></div>
+        <div class="pp-card" id="ppCard"></div>
+        <div class="pp-actions"><button class="pp-no" id="ppNo">Skip</button><button class="pp-yes" id="ppYes">Approve &amp; post</button></div>
+        <div class="feed" id="feed" aria-label="Published posts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7 Hikari -->
+  <section class="stop" data-name="Hikari" id="s7">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 7</span><h2>Hikari</h2><p class="dest">Japanese restaurant website, Windsor</p></div>
+      <p class="lede">A restaurant site should feel like walking in. Dark ink, warm light, heavy motion — and the menu one thumb-tap away, because that's what hungry people are looking for.<span class="status">Client site</span></p>
+      <div class="chips"><span class="chip">Hand-coded</span><span class="chip">Motion design</span><span class="chip">Vercel</span></div>
+      <div class="links"><a class="btn btn-ghost" data-cfg-href="hikari" href="#" target="_blank" rel="noopener">Visit the site</a></div>
+    </div>
+    <div class="visual">
+      <div class="device-wrap" data-device="phone" data-tabs='[["Website","hikari"]]' data-mock="hikari"></div>
+    </div>
+  </section>
+
+  <!-- 8 Dmatrix -->
+  <section class="stop" data-name="Dmatrix" id="s8">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 8</span><h2>Dmatrix</h2><p class="dest">Dance studio site that plays its own beat</p></div>
+      <p class="lede">A dance studio site should move. This one makes music straight from code — no audio files to load — and pushes every visitor towards a DM, a call or a booking. Turn your sound on and drop the beat.</p>
+      <ul class="facts">
+        <li>Hip-hop, Bollywood, contemporary and kids batches, each with its own vibe</li>
+        <li>Posters, banners and AI videos for their Instagram too</li>
+      </ul>
+      <div class="links"><a class="btn btn-ghost" data-cfg-href="dmatrixInsta" href="#" target="_blank" rel="noopener">Dmatrix on Instagram</a></div>
+      <div class="chips"><span class="chip">Web Audio API</span><span class="chip">Animation</span><span class="chip">Instagram content</span></div>
+    </div>
+    <div class="visual">
+      <div class="device-wrap" data-device="phone" data-tabs='[["Website","dmatrix"]]' data-mock="dmatrix"></div>
+    </div>
+  </section>
+
+  <!-- 9 Spec work -->
+  <section class="stop wide" data-name="Spec rebuilds" id="s9">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 9</span><h2>Built before asked</h2><p class="dest">Concept rebuilds for brands I'd love to work with</p></div>
+      <p class="lede">When I like a brand, I don't send a cold email — I rebuild their site around the one idea that makes them different, then send that.</p>
+    </div>
+    <div class="visual">
+      <div class="tiles">
+        <div class="tile">
+          <h3>NERA bikinis</h3>
+          <p>Their whole idea: bikinis sized like bras, top and bottom separately. So the hero lets you adjust the fit yourself. Drag it.</p>
+          <div class="fit-stage">
+            <svg viewBox="0 0 200 120" width="220" aria-hidden="true">
+              <path id="fitTop" fill="#A12147" d=""/>
+              <path id="fitBand" stroke="#4F561E" stroke-width="5" fill="none" stroke-linecap="round" d=""/>
+            </svg>
+          </div>
+          <input type="range" class="fit-range" id="fit" min="0" max="100" value="20" aria-label="Adjust bikini fit">
+          <div class="fit-lbl"><span>Loose band</span><span id="fitWord">Almost there</span><span>Perfect fit</span></div>
+        </div>
+        <div class="tile">
+          <h3>Maisie</h3>
+          <p>A period and symptom tracker. The redesign's job: explain the app in three seconds. Tap through them.</p>
+          <div class="steps3" id="steps3">
+            <button aria-pressed="true">1 second · Track<small>Log your period and how you feel, in two taps.</small></button>
+            <button aria-pressed="false">2 seconds · See patterns<small>Your cycle, mood and symptoms on one timeline.</small></button>
+            <button aria-pressed="false">3 seconds · Know when something's off<small>Get a heads-up when your pattern changes.</small></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10 Reels -->
+  <section class="stop wide" data-name="Reel machine" id="s10">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Exit 10</span><h2>The reel machine</h2><p class="dest">Business idea in, Instagram reel out</p></div>
+      <p class="lede">What I'm building right now: a pipeline that turns one line of text into a 30-second reel — background video, AI presenter in the corner, voiceover and captions. One a day, on autopilot. Try the storyboard.<span class="status wip">Building</span></p>
+    </div>
+    <div class="visual">
+      <div class="reel-box">
+        <div class="flow-row" style="margin-top:0">
+          <input class="flow-input" id="reelIn" value="mobile dog grooming van" aria-label="Business idea">
+          <button class="btn btn-go" id="reelGo">Make the reel</button>
+        </div>
+        <div class="frames" id="frames"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 Garage -->
+  <section class="stop wide" data-name="The garage" id="s11">
+    <div class="node"></div>
+    <div class="txt">
+      <div class="sign"><span class="exit">Last exit</span><h2>The garage</h2><p class="dest">Where the code lives</p></div>
+      <p class="lede">Plain, fast code — mostly hand-written HTML, CSS and JavaScript, with Supabase and n8n doing the heavy lifting. No bloated frameworks unless the project needs one.</p>
+    </div>
+    <div class="visual">
+      <div class="garage">
+        <a class="repo" data-cfg-href="github" href="#" target="_blank" rel="noopener"><span style="font-size:24px">🐙</span><span><b>github.com/hishadows</b><small>pathfynder · pathfynder-form · website</small></span></a>
+        <a class="repo" href="https://pathfynder.ca" target="_blank" rel="noopener"><span style="font-size:24px">🌐</span><span><b>pathfynder.ca</b><small>Landing, Explore, PWA</small></span></a>
+        <a class="repo" data-cfg-href="dashboard" href="#" target="_blank" rel="noopener"><span style="font-size:24px">📊</span><span><b>app.pathfynder.ca</b><small>Dispatch dashboard</small></span></a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="yours" id="yours">
+  <div class="wrap">
+    <h2>Your stop. What should I build you?</h2>
+    <p>Pick what you run and I'll show you what I'd build first. Or if you want a co-founder who ships, pick the last one.</p>
+    <div class="biz" id="biz">
+      <button data-b="food" aria-pressed="false">Restaurant or café</button>
+      <button data-b="studio" aria-pressed="false">Studio or gym</button>
+      <button data-b="service" aria-pressed="false">Local service</button>
+      <button data-b="brand" aria-pressed="false">Online brand</button>
+      <button data-b="cofounder" aria-pressed="false">A startup idea</button>
+    </div>
+    <div class="plan" id="plan" aria-live="polite">
+      <h3>Pick one above</h3>
+      <p style="color:var(--muted);margin:0">You'll get a three-step build plan in plain English.</p>
+    </div>
+    <div class="slot">
+      <div class="slot-win" id="slotWin"><span>Feeling curious? Spin for an automation idea.</span></div>
+      <button class="btn btn-go" id="spin">Spin</button>
+    </div>
+
+    <div class="ticket" id="ticket">
+      <div class="ticket-main">
+        <h3 id="tkTitle">Your ticket</h3>
+        <div class="tk-grid">
+          <div><small>Passenger</small><b>You</b></div>
+          <div><small>Driver</small><b>Pranay</b></div>
+          <div><small>From</small><b>An idea</b></div>
+          <div><small>To</small><b>Live and working</b></div>
+          <div><small>Based in</small><b>Windsor, Ontario</b></div>
+          <div><small>Stops visited</small><b id="tkStops">0 of 11</b></div>
+        </div>
+        <p class="tk-note" id="tkNote">Visit every stop to turn this ticket gold.</p>
+      </div>
+      <div class="ticket-stub" id="contact">
+        <a class="btn btn-go" data-cfg-href="email" href="#">Email me</a>
+        <a class="btn btn-wa" data-cfg-href="whatsapp" href="#" target="_blank" rel="noopener">WhatsApp me</a>
+        <a class="btn btn-ghost" data-cfg-href="linkedin" href="#" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn btn-ghost" data-cfg-href="instagram" href="#" target="_blank" rel="noopener">Instagram</a>
+      </div>
     </div>
   </div>
-<br>
-<br>
-  <div class="bottom-container">
-    <a class="footer-link" href="https://www.linkedin.com/in/pranay-prajapati-316446226/">LinkedIn</a>
-    <a class="footer-link" href="https://www.instagram.com/_pranay_prajapati/">Instagram</a>
-    <a class="footer-link" href="https://docs.google.com/document/d/1El_Gb6A8UEF4F0ztMNX6nLat4a3t35_Jak73vPVnNEA/edit#heading=h.dmii0whw8ubs">Current project</a>
-    <p class="copyright">© pranay prajapati.</p>
-  </div>
+</section>
+</main>
 
+<footer>Built by hand by Pranay · Founder, Pathfynder Car Pool Inc. · Psst: tap the logo five times.</footer>
+
+<div class="trip" aria-label="Trip progress">
+  <div class="trip-inner">
+    <div class="trip-road" id="tripRoad"><span class="trip-car" id="tripCar">🚗</span></div>
+    <div class="trip-count" id="tripCount">0/11<small>stamped</small></div>
+  </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<canvas id="confetti"></canvas>
+
+<script>
+/* ======= EDIT THESE ONCE ======= */
+const CONFIG = {
+  email: "pathfynder.ca@gmail.com",
+  whatsapp: "",          // e.g. "https://wa.me/12262805014" — leave "" to hide the button
+  linkedin: "https://www.linkedin.com/in/pranay-prajapati-316446226/",
+  github: "https://github.com/hishadows",
+  bot: "https://wa.me/916356600421",
+  pagepilot: "https://pagepilot.pathy.dpdns.org",
+  // Live screens (phone/laptop frames). "" = show the designed mock instead.
+  pathfynder: "https://pathfynder.ca",
+  explore: "https://pathfynder.ca/explore",
+  miniapp: "https://pathfynder-form.vercel.app",            // check: your pathfynder-form Vercel URL
+  miniSearch: "https://pathfynder-form.vercel.app/search",
+  miniManage: "https://pathfynder-form.vercel.app/manageride",
+  dashboard: "https://app.pathfynder.ca",
+  hikari: "",                                               // paste Hikari's live URL here
+  dmatrix: "",                                              // paste Dmatrix's live URL here
+  dmatrixInsta: "https://www.instagram.com/dmatrix__dance_studio/",
+  instagram: "https://www.instagram.com/_pranay_prajapati/"
+};
+/* =============================== */
+
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* config links */
+$$("[data-cfg-href]").forEach(a => {
+  const k = a.dataset.cfgHref; let v = CONFIG[k];
+  if (!v) { a.remove(); return; }
+  if (k === "email") v = "mailto:" + v + "?subject=" + encodeURIComponent("Saw your portfolio — let's build something");
+  a.href = v;
+});
+
+/* toast */
+let toastT;
+function toast(t){ const el=$("#toast"); el.textContent=t; el.classList.add("show"); clearTimeout(toastT); toastT=setTimeout(()=>el.classList.remove("show"),1800); }
+
+/* theme */
+const themeBtn = $("#theme");
+function isDark(){ const t=document.documentElement.dataset.theme; return t ? t==="dark" : matchMedia("(prefers-color-scheme: dark)").matches; }
+function syncTheme(){ themeBtn.textContent = isDark() ? "☀️" : "🌙"; }
+try { const saved = localStorage.getItem("pf-theme"); if (saved) document.documentElement.dataset.theme = saved; } catch(e){}
+syncTheme();
+themeBtn.addEventListener("click", () => {
+  const next = isDark() ? "light" : "dark";
+  document.documentElement.dataset.theme = next;
+  try { localStorage.setItem("pf-theme", next); } catch(e){}
+  syncTheme(); toast(next === "dark" ? "Night drive. Headlights on." : "Good morning.");
+});
+
+/* audio helpers */
+let actx;
+function ac(){ if(!actx){ const A=window.AudioContext||window.webkitAudioContext; if(!A) return null; actx=new A(); } if(actx.state==="suspended") actx.resume(); return actx; }
+function tone(freq, start, dur, type="square", vol=.08){
+  const c=ac(); if(!c) return; const o=c.createOscillator(), g=c.createGain();
+  o.type=type; o.frequency.value=freq; g.gain.setValueAtTime(vol,c.currentTime+start);
+  g.gain.exponentialRampToValueAtTime(.0001,c.currentTime+start+dur);
+  o.connect(g).connect(c.destination); o.start(c.currentTime+start); o.stop(c.currentTime+start+dur+.02);
+}
+
+/* honk */
+const car=$("#car"), bubble=$("#bubble");
+const honks=["Beep beep!","Where to?","Seats available!","Need a ride?","Vroom."];
+car.addEventListener("click", () => {
+  tone(392,0,.18,"square",.07); tone(330,.2,.24,"square",.07);
+  car.classList.remove("honk"); void car.offsetWidth; car.classList.add("honk");
+  bubble.textContent = honks[Math.floor(Math.random()*honks.length)];
+  bubble.classList.add("show"); setTimeout(()=>bubble.classList.remove("show"),1100);
+});
+
+/* easter egg: tap logo 5x */
+let taps=0, tapT;
+$("#logo").addEventListener("click", () => {
+  taps++; clearTimeout(tapT); tapT=setTimeout(()=>taps=0,1500);
+  if (taps>=5){ taps=0; document.body.classList.toggle("turbo");
+    const on=document.body.classList.contains("turbo");
+    car.textContent = on ? "🚀" : "🚗"; $("#tripCar").textContent = on ? "🚀" : "🚗";
+    toast(on ? "Turbo mode unlocked 🚀" : "Back to normal speed"); if(on) confetti(60);
+  } else if (taps===1) window.scrollTo({top:0,behavior:reduce?"auto":"smooth"});
+});
+
+/* odometer */
+const odoIO = new IntersectionObserver(es => es.forEach(e => {
+  if(!e.isIntersecting) return; odoIO.disconnect();
+  $$(".odo-num").forEach(el => { if (el.dataset.text) return; const to=+el.dataset.to; const t0=performance.now(); const d=reduce?1:1400;
+    (function step(t){ const p=Math.min(1,(t-t0)/d); el.textContent=Math.round(to*(1-Math.pow(1-p,3))).toLocaleString(); if(p<1) requestAnimationFrame(step); })(t0); });
+}), {threshold:.4});
+odoIO.observe($("#odo"));
+
+/* devices with live iframes */
+const mocks = {
+  hikari: () => `<div class="mock hikari"><div><div class="kanji">光</div><h4>Hikari</h4><div style="font-size:14px;opacity:.75">Japanese kitchen · Windsor</div></div>
+    <ul><li><span>Salmon aburi</span><span>16</span></li><li><span>Tonkotsu ramen</span><span>18</span></li><li><span>Matcha tiramisu</span><span>9</span></li></ul>
+    <button class="beat" style="background:#e8b04a;color:#0b0a09">See the menu</button></div>`,
+  dmatrix: () => `<div class="mock dm"><div><div style="font-size:13px;opacity:.8">@dmatrix__dance_studio</div><h4>Dance like nobody's grading.</h4></div>
+    <div class="eq" id="eq">${"<i></i>".repeat(10)}</div><button class="beat" id="beatBtn">▶ Drop the beat</button></div>`
+};
+function buildDevice(wrap){
+  const kind=wrap.dataset.device, tabs=JSON.parse(wrap.dataset.tabs||"[]"), mock=wrap.dataset.mock;
+  const W = kind==="laptop" ? 1280 : 390, H = kind==="laptop" ? 800 : 844;
+  const first = tabs.find(t => CONFIG[t[1]]);
+  const frame = kind==="laptop"
+    ? `<div class="laptop"><div class="lid"><div class="screen"></div></div><div class="base"></div></div>`
+    : `<div class="phone"><div class="screen"></div></div>`;
+  wrap.innerHTML = frame;
+  const screen = $(".screen", wrap);
+  if (!first) { screen.innerHTML = mocks[mock] ? mocks[mock]() : ""; if (mock==="dmatrix") initBeat(screen); return; }
+  screen.innerHTML = `<div class="loading">Loading the live site…</div>
+    <iframe title="Live preview" width="${W}" height="${H}" referrerpolicy="no-referrer-when-downgrade" allow="geolocation; clipboard-write"></iframe>
+    <button class="shield" aria-label="Use the live site"><span>Tap to try it live</span></button>
+    <button class="ifr-done">Done</button>`;
+  const ifr=$("iframe",screen), load=$(".loading",screen);
+  const fit=()=>{ const s=screen.clientWidth/W; ifr.style.transform=`scale(${s})`; };
+  new ResizeObserver(fit).observe(screen); fit();
+  ifr.addEventListener("load",()=>load.classList.add("gone"));
+  $(".shield",screen).addEventListener("click",()=>screen.classList.add("live"));
+  $(".ifr-done",screen).addEventListener("click",()=>screen.classList.remove("live"));
+  let current = first[1];
+  const setSrc = key => { current=key; load.classList.remove("gone"); ifr.src=CONFIG[key];
+    const ol=$(".open-link",wrap); if(ol) ol.href=CONFIG[key];
+    $$(".tab",wrap).forEach(b=>b.setAttribute("aria-pressed", b.dataset.k===key)); };
+  const live = tabs.filter(t=>CONFIG[t[1]]);
+  if (live.length>1){ const tb=document.createElement("div"); tb.className="tabs";
+    tb.innerHTML = live.map(t=>`<button class="tab" data-k="${t[1]}" aria-pressed="${t[1]===current}">${t[0]}</button>`).join("");
+    tb.addEventListener("click",e=>{ const b=e.target.closest(".tab"); if(b) setSrc(b.dataset.k); }); wrap.appendChild(tb); }
+  const ol=document.createElement("a"); ol.className="open-link"; ol.target="_blank"; ol.rel="noopener"; ol.href=CONFIG[current];
+  ol.textContent="Open full screen in a new tab"; wrap.appendChild(ol);
+  const io=new IntersectionObserver(es=>{ if(es[0].isIntersecting){ io.disconnect(); setSrc(current);} },{rootMargin:"400px"});
+  io.observe(wrap);
+  setTimeout(()=>{ if(!load.classList.contains("gone")) load.innerHTML='Still loading. <a href="'+CONFIG[current]+'" target="_blank" rel="noopener">Open it in a new tab</a>'; },9000);
+}
+$$("[data-device]").forEach(buildDevice);
+
+/* Dmatrix beat */
+function initBeat(scope){
+  const btn=$("#beatBtn",scope), bars=$$("#eq i",scope); let timer=null, step=0;
+  btn.addEventListener("click",()=>{
+    if(timer){ clearInterval(timer); timer=null; btn.textContent="▶ Drop the beat"; bars.forEach(b=>b.style.height="12%"); return; }
+    if(!ac()){ toast("Audio isn't supported here"); return; }
+    btn.textContent="■ Stop"; step=0;
+    timer=setInterval(()=>{
+      const c=actx, t=c.currentTime;
+      if(step%4===0||step%16===10){ const o=c.createOscillator(),g=c.createGain(); o.frequency.setValueAtTime(150,t); o.frequency.exponentialRampToValueAtTime(40,t+.15); g.gain.setValueAtTime(.5,t); g.gain.exponentialRampToValueAtTime(.001,t+.2); o.connect(g).connect(c.destination); o.start(t); o.stop(t+.22); }
+      if(step%8===4){ const b=c.createBuffer(1,c.sampleRate*.12,c.sampleRate),d=b.getChannelData(0); for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,2); const s=c.createBufferSource(),g=c.createGain(); g.gain.value=.25; s.buffer=b; s.connect(g).connect(c.destination); s.start(t); }
+      if(step%2===1) tone(8000,0,.03,"square",.015);
+      if(step%8===0) tone([220,262,196,247][(step/8|0)%4],0,.3,"triangle",.05);
+      bars.forEach((b,i)=>b.style.height=(12+Math.random()*(step%4===0?88:50)*(1-Math.abs(i-4.5)/8))+"%");
+      step=(step+1)%32;
+    },125);
+  });
+}
+
+/* hot routes */
+const routeInfo=[
+  "Kitchener → Brampton: <span class='heat'>🔥🔥</span> steady weekday commuters heading out in the morning.",
+  "Brampton → Niagara Falls: <span class='heat'>🔥🔥🔥</span> weekend crowd — long trip, so riders happily split gas.",
+  "Welland → Niagara Falls: <span class='heat'>🔥🔥🔥</span> the hottest short hop. This is the corridor Pathfynder is proving first."
+];
+function pickRoute(i){ $$(".map-svg .rt").forEach(p=>p.classList.toggle("on",+p.dataset.r===i));
+  $$(".route-btns .tab").forEach(b=>b.setAttribute("aria-pressed",+b.dataset.r===i)); $("#routeRead").innerHTML=routeInfo[i]; }
+$$(".route-btns .tab, .map-svg .rt").forEach(el=>el.addEventListener("click",()=>pickRoute(+el.dataset.r)));
+
+/* whatsapp sim */
+const waBody=$("#waBody"), waQuick=$("#waQuick"), waStatus=$("#waStatus");
+const botLink='<a href="'+CONFIG.pathfynder+'/explore" target="_blank" rel="noopener">pathfynder.ca/explore</a>';
+const scripts={
+  messy:["Welland → Niagara Falls, tomorrow 👍\nWhat time do you want to leave? Just send something like \"8am\".", "__time", "Saved ✅ Welland → Niagara Falls, tomorrow 8:00 am.\n\n🚗 2 drivers are going your way.\nSee them here: "+botLink],
+  pass:["Saved ✅ Brampton → Niagara Falls, Friday 5:00 pm.\n\n🚗 3 drivers found near your route.\nView and contact them: "+botLink+"\n\nI'll keep your request open until you find a ride."],
+  drive:["Nice! Saved ✅ Kitchener → Brampton, tomorrow 8:00 am, 3 seats.\n\n🙋 5 passengers are looking on this route.\nSee them here: "+botLink]
+};
+function addMsg(html,cls){ const m=document.createElement("div"); m.className="msg "+cls; m.innerHTML=html; waBody.appendChild(m); waBody.scrollTop=waBody.scrollHeight; return m; }
+function botSay(text,cb){ waStatus.textContent="typing…"; const t=addMsg("typing…","in typing");
+  setTimeout(()=>{ t.remove(); waStatus.textContent="online · powered by Pathfynder"; addMsg(text,"in"); tone(880,0,.06,"sine",.04); cb&&cb(); }, reduce?200:1100); }
+function runScript(k){
+  $$(".qr",waQuick).forEach(b=>b.disabled=true);
+  const steps=scripts[k]; let i=0;
+  const next=()=>{ if(i>=steps.length){ $$(".qr",waQuick).forEach(b=>b.disabled=false); return; }
+    const s=steps[i++];
+    if(s==="__time"){ setTimeout(()=>{ addMsg("8am","out"); setTimeout(next,400); },900); return; }
+    botSay(s,next); };
+  next();
+}
+waQuick.addEventListener("click",e=>{ const b=e.target.closest(".qr"); if(!b||b.disabled) return; addMsg(b.textContent,"out"); runScript(b.dataset.k); });
+
+/* n8n runner */
+const places={"welland":[42.99,-79.25],"niagara falls":[43.09,-79.08],"niagara":[43.09,-79.08],"brampton":[43.73,-79.76],"kitchener":[43.45,-80.49],"st catharines":[43.16,-79.24],"st. catharines":[43.16,-79.24],"toronto":[43.65,-79.38],"hamilton":[43.26,-79.87],"windsor":[42.31,-83.04],"london":[42.98,-81.25],"waterloo":[43.46,-80.52],"mississauga":[43.59,-79.64],"guelph":[43.55,-80.25]};
+function extract(txt){
+  const t=txt.toLowerCase(); const found=[];
+  Object.keys(places).sort((a,b)=>b.length-a.length).forEach(p=>{ const i=t.indexOf(p); if(i>-1 && !found.some(f=>f.i<=i && i<f.i+f.p.length)) found.push({p,i}); });
+  found.sort((a,b)=>a.i-b.i);
+  const time=(t.match(/\b(\d{1,2})(:\d{2})?\s?(am|pm)\b/)||[])[0]||"";
+  const type=/\b(driving|driver|seats?|offering)\b/.test(t)?"driver":"passenger";
+  const cap=s=>s.replace(/\b\w/g,c=>c.toUpperCase());
+  return {from:found[0]?cap(found[0].p):"", to:found[1]?cap(found[1].p):"", time, type};
+}
+let running=false;
+$("#runFlow").addEventListener("click",()=>{
+  if(running) return; running=true;
+  const txt=$("#flowIn").value.trim()||"need ride welland to niagara falls 7am";
+  const d=extract(txt), ns=$$("#nodes .n"), log=$("#log"); ns.forEach(n=>n.classList.remove("active","done")); log.textContent="";
+  const g1=places[d.from.toLowerCase()], g2=places[d.to.toLowerCase()];
+  const matches = (d.from && d.to) ? 1+Math.floor(Math.random()*5) : 0;
+  const lines=[
+    `→ message in: "${txt}"`,
+    `→ AI extracted: ${JSON.stringify(d)}`,
+    g1&&g2 ? `→ ${d.from} ${g1.join(", ")}  ·  ${d.to} ${g2.join(", ")}` : `→ couldn't place "${!d.from?"pickup":"drop-off"}" — bot will ask for it`,
+    `→ saved row #${10000+Math.floor(Math.random()*9000)}`,
+    matches ? `→ ${matches} ${d.type==="driver"?"passenger":"driver"}${matches>1?"s":""} within 5 km, ±30 min` : `→ waiting for missing details before matching`,
+    matches ? `→ replied with Explore link in ${(1.2+Math.random()).toFixed(1)}s ✅` : `→ replied: "Where are you heading from?" ✅`
+  ];
+  let i=0; const tick=()=>{ if(i>0) ns[i-1].classList.replace("active","done"); if(i>=ns.length){ running=false; tone(660,0,.08,"sine",.05); tone(990,.09,.12,"sine",.05); return; }
+    ns[i].classList.add("active"); log.textContent+=lines[i]+"\n"; tone(520+i*60,0,.04,"sine",.03); i++; setTimeout(tick,reduce?60:650); };
+  tick();
+});
+
+/* PagePilot */
+const ppQueue=[
+  {dm:"@aman.k: can u post that OSAP deadline is Oct 31??",draft:"OSAP reminder: apply before Oct 31 ⏰",cap:"Don't leave money on the table. Link in bio for the steps.",c:"#2D6CDF",e:"⏰"},
+  {dm:"@riya_s: room available near Brock Uni, $650 all incl",draft:"Room for rent near Brock — $650, all-in 🏠",cap:"DM the poster directly. Always view before you pay.",c:"#0FA3A3",e:"🏠"},
+  {dm:"@jay.p: free pizza at the library 4pm today lol",draft:"Free pizza today, 4pm, main library 🍕",cap:"First come, first served. Tag a hungry friend.",c:"#F2545B",e:"🍕"},
+  {dm:"@nina: part time cashier jobs at the mall, hiring now",draft:"Hiring now: part-time cashier roles 💼",cap:"Flexible hours, students welcome. Apply in store.",c:"#7A4DD8",e:"💼"}
+];
+let ppI=0;
+function ppRender(){ const card=$("#ppCard"); $("#ppCount").textContent=(ppQueue.length-ppI)+" waiting";
+  if(ppI>=ppQueue.length){ card.innerHTML='<p style="margin:0;font-weight:700">Inbox zero 🎉</p><p class="pp-cap">That would have taken 20 minutes by hand.</p><button class="tab" id="ppReset" style="margin-top:8px">Refill the inbox</button>';
+    $("#ppReset").onclick=()=>{ ppI=0; $("#feed").innerHTML=""; ppRender(); }; $("#ppYes").disabled=$("#ppNo").disabled=true; return; }
+  $("#ppYes").disabled=$("#ppNo").disabled=false;
+  const q=ppQueue[ppI]; card.className="pp-card";
+  card.innerHTML=`<div class="pp-dm">💬 ${q.dm}</div><div class="pp-draft" style="background:${q.c}">${q.draft}</div><p class="pp-cap">AI caption: ${q.cap}</p>`; }
+function ppAct(yes){ const card=$("#ppCard"); if(ppI>=ppQueue.length) return; card.classList.add(yes?"fly-r":"fly-l");
+  if(yes){ const f=document.createElement("div"); f.style.background=ppQueue[ppI].c; f.textContent=ppQueue[ppI].e; $("#feed").prepend(f); tone(740,0,.08,"sine",.05); }
+  setTimeout(()=>{ ppI++; ppRender(); },reduce?10:320); }
+$("#ppYes").addEventListener("click",()=>ppAct(true)); $("#ppNo").addEventListener("click",()=>ppAct(false));
+ppRender();
+
+/* NERA fit */
+function drawFit(v){ const p=v/100, gap=24-18*p, sag=18-16*p, w=26+6*p;
+  $("#fitTop").setAttribute("d",`M${100-gap-w*2} 70 Q${100-gap-w} ${10+sag} ${100-gap} 70 Z M${100+gap} 70 Q${100+gap+w} ${10+sag} ${100+gap+w*2} 70 Z`);
+  $("#fitBand").setAttribute("d",`M20 ${78+sag*.6} Q100 ${78+sag} 180 ${78+sag*.6}`);
+  $("#fitWord").textContent = v<35?"Gaping":v<75?"Almost there":"Made for you"; }
+$("#fit").addEventListener("input",e=>drawFit(+e.target.value)); drawFit(20);
+
+/* Maisie steps */
+$("#steps3").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $$("#steps3 button").forEach(x=>x.setAttribute("aria-pressed",x===b)); });
+
+/* Reel storyboard */
+function makeReel(){ const idea=($("#reelIn").value.trim()||"mobile dog grooming van").replace(/[<>]/g,"");
+  const frames=[["0–3s · Hook",`Nobody talks about this business: ${idea}.`,"linear-gradient(160deg,#2D6CDF,#0F1724)"],
+                ["3–20s · How it works",`Low start-up cost, real demand, and customers who come back every month.`,"linear-gradient(160deg,#0FA3A3,#14313b)"],
+                ["20–30s · Payoff",`Would you start a ${idea}? Comment yes or no.`,"linear-gradient(160deg,#F2545B,#3a1420)"]];
+  $("#frames").innerHTML=frames.map(f=>`<div class="frame" style="background:${f[2]}"><em>${f[0]}</em><div class="ava">🧑🏽</div><span>${f[1]}</span></div>`).join("");
+}
+$("#reelGo").addEventListener("click",()=>{ makeReel(); tone(600,0,.05,"sine",.04); }); makeReel();
+
+/* Your stop */
+const plans={
+  food:{t:"For your restaurant",s:["A fast mobile site with a menu you can update yourself","A WhatsApp bot that answers hours, takes reservations and sends directions","An automatic thank-you message that asks happy guests for a Google review"],m:"First version live in about 2 weeks."},
+  studio:{t:"For your studio or gym",s:["A site that shows your classes and books a trial in two taps","WhatsApp reminders before every class, so fewer no-shows","An Instagram pipeline that turns class clips into posts"],m:"First version live in about 2 weeks."},
+  service:{t:"For your local service",s:["A quote form that sends every new lead to your phone instantly","An AI assistant that answers common questions on WhatsApp, 24/7","A simple dashboard of jobs, customers and follow-ups"],m:"First version live in 1–3 weeks."},
+  brand:{t:"For your online brand",s:["A launch site with a waitlist that actually converts","DM-to-post automation for your Instagram, like PagePilot","A weekly sales and leads summary, sent to your inbox automatically"],m:"First version live in 2–3 weeks."},
+  cofounder:{t:"For your startup idea",s:["A working MVP in weeks, not months — I've shipped Pathfynder solo","Bots, data pipelines, maps and matching engines are my comfort zone","I'm looking for a co-founder who loves the market side and wants to be the face — I'll handle the tech"],m:"Let's talk about the idea first. Coffee's on me if you're in Ontario."}
+};
+$("#biz").addEventListener("click",e=>{ const b=e.target.closest("button"); if(!b) return; $$("#biz button").forEach(x=>x.setAttribute("aria-pressed",x===b));
+  const p=plans[b.dataset.b]; $("#plan").innerHTML=`<h3>${p.t}</h3><ol>${p.s.map(x=>`<li>${x}</li>`).join("")}</ol><p class="meta">${p.m}</p>`; });
+
+const ideas=["Auto-text customers when their order is ready","A bot that books appointments from Instagram DMs","Turn every Google review into an Instagram post","Missed call? Auto-reply on WhatsApp with your booking link","A daily summary of yesterday's sales, sent at 8am","Invoices that chase late payers politely, by themselves","Scrape local listings and alert you to new leads","A form that turns into a signed quote PDF instantly","Birthday discount messages that send themselves","A live map of where your delivery drivers are"];
+let lastIdea=-1;
+$("#spin").addEventListener("click",()=>{ const w=$("#slotWin"); w.classList.add("spin"); let n=0;
+  const iv=setInterval(()=>{ w.firstElementChild.textContent=ideas[Math.floor(Math.random()*ideas.length)]; tone(300+Math.random()*300,0,.03,"square",.02);
+    if(++n>(reduce?1:14)){ clearInterval(iv); w.classList.remove("spin"); let k; do{k=Math.floor(Math.random()*ideas.length)}while(k===lastIdea); lastIdea=k;
+      w.firstElementChild.textContent="💡 "+ideas[k]+" — I can build this."; tone(880,0,.15,"triangle",.05); } },70); });
+
+/* Trip progress + stamps */
+const stops=$$(".stop"), road=$("#tripRoad"), tripCar=$("#tripCar"), stamped=new Set();
+stops.forEach((s,i)=>{ const d=document.createElement("button"); d.className="trip-dot"; d.style.left=(4+i*(92/(stops.length-1)))+"%";
+  d.setAttribute("aria-label","Go to stop "+(i+1)+": "+s.dataset.name); d.addEventListener("click",()=>s.scrollIntoView({behavior:reduce?"auto":"smooth"})); road.appendChild(d); s._dot=d; });
+function updateCount(){ const n=stamped.size, N=stops.length; $("#tripCount").innerHTML=`${n}/${N}<small>stamped</small>`; $("#tkStops").textContent=`${n} of ${N}`;
+  if(n===N && !$("#ticket").classList.contains("gold")){ $("#ticket").classList.add("gold"); $("#tkTitle").textContent="Golden ticket 🎟️";
+    $("#tkNote").textContent="You visited every stop. Respect. Send me a message and mention the golden ticket."; confetti(160); toast("All stops stamped! 🎉"); } }
+const stopIO=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting && !stamped.has(e.target)){ stamped.add(e.target); e.target.classList.add("stamped"); e.target._dot.classList.add("on");
+  if(stamped.size>1) toast("Stamped: "+e.target.dataset.name); tone(1200,0,.05,"sine",.03); updateCount(); } }),{threshold:.35});
+stops.forEach(s=>stopIO.observe(s));
+function onScroll(){ const el=$("#stops"), r=el.getBoundingClientRect(); const p=Math.min(1,Math.max(0,(innerHeight*.5-r.top)/r.height)); tripCar.style.left=(4+p*92)+"%"; }
+addEventListener("scroll",onScroll,{passive:true}); onScroll();
+
+/* confetti */
+function confetti(n){ if(reduce) return; const c=$("#confetti"), x=c.getContext("2d"); c.width=innerWidth; c.height=innerHeight;
+  const cols=["#FFC93C","#0FA3A3","#F2545B","#25D366","#2D6CDF"];
+  const ps=Array.from({length:n},()=>({x:innerWidth/2,y:innerHeight*.6,vx:(Math.random()-.5)*14,vy:-Math.random()*16-6,r:Math.random()*6+4,c:cols[Math.random()*5|0],a:Math.random()*6}));
+  let f=0; (function draw(){ x.clearRect(0,0,c.width,c.height); ps.forEach(p=>{ p.vy+=.45; p.x+=p.vx; p.y+=p.vy; p.a+=.2; x.save(); x.translate(p.x,p.y); x.rotate(p.a); x.fillStyle=p.c; x.fillRect(-p.r/2,-p.r/4,p.r,p.r/2); x.restore(); });
+    if(++f<150) requestAnimationFrame(draw); else x.clearRect(0,0,c.width,c.height); })(); }
+</script>
 </body>
-
-
 </html>
